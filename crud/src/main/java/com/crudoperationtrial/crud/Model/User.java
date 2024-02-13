@@ -34,5 +34,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @Column(name = "image")
+    private String imagepath;
     
 }

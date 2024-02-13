@@ -23,7 +23,7 @@ const Header = () => {
         <>
         <nav className="navbar navbar-expand-lg bg-body-white border">
       <div className="container-fluid">
-        <a className="navbar-brand mx-3" href="#"> home</a>
+        <Link to='/' className="navbar-brand mx-3" href="#"> home</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -34,7 +34,7 @@ const Header = () => {
             <>
             <li className="nav-item dropdown float-left mx-5">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-regular fa-user"></i>
+              <i className="fa-regular fa-user"></i>
               </a>
               <ul className="dropdown-menu">
                 <li><Link to='/login' className="dropdown-item" href="#">login</Link></li>
@@ -50,7 +50,7 @@ const Header = () => {
             </li>
             <li className="nav-item dropdown float-left mx-5">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-regular fa-user"></i>
+              <i className="fa-regular fa-user"></i>
               </a>
               <ul className="dropdown-menu">
                 <li><button  onClick={loggingout} className="dropdown-item" href="#">logout</button></li> 

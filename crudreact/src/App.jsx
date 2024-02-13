@@ -8,6 +8,7 @@ import UserHome from './components/pages/UserHome';
 import UserProfile from './components/pages/UserProfile';
 import AdminProfile from './components/pages/AdminProfile';
 import AdminMan from './components/pages/AdminMan';
+import CreateUser from './components/pages/CreateUser';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path='/admin' element={<AdminHome/>}/>
       <Route path='/admin/profile' element={<AdminProfile/>}/>
       <Route path='/admin/userman' element={<AdminMan/>}/>
+      <Route path='/admin/createUser' element={<CreateUser/>}/>
       <Route path='/profile' element={<UserProfile/>}/>
      </Routes>
     </div>

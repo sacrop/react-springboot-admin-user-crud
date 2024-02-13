@@ -33,7 +33,7 @@ public class SecurityConfig {
         return http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
-            req->req.requestMatchers("/login/**","/register/**")
+            req->req.requestMatchers("/login/**","/register/**","/img/**")
             .permitAll()
             .requestMatchers("/admin/**").hasAuthority("ADMIN")
             // .requestMatchers("/user/**").hasAuthority("USER")
@@ -48,7 +48,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
