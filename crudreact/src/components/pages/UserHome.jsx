@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../header/user/Header'
 
 const UserHome = () => {
+  
   return (
     <Header></Header>
   )

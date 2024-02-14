@@ -2,28 +2,47 @@ import React, { useEffect, useState } from 'react'
 import Header from '../header/user/Header'
 import AxiosInstance from '../Axios/AxiosInstance'
 import dfImg from '../assets/images/default_image_01.png'
+import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
   const [previewUrl, setPreviewUrl] = useState();
-  const [imagefile,setImagefile]=useState();
-  const [imageUrl,setImageUrl]=useState();
+  const [imagefile, setImagefile] = useState();
+  const [imageUrl, setImageUrl] = useState();
+  const navigate = useNavigate(); 
+  // redirect 
+  useEffect(() => {
+    const token = localStorage.getItem('jwttoken');
+    const role = localStorage.getItem('role');
+    if (!token) {
+      navigate('/login');
+    }
+    if (role === 'ADMIN') {
+      navigate('/admin')
+    }
+  }, [navigate]);
 
-
+  // fetching user details and imageurl 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await AxiosInstance.get('profile');
-        const imagePath=response.data.imagepath+"";
-        setUser(response.data);
+        const response = await AxiosInstance.get('profile', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwttoken')}`
+          }
+        });
+        const imagePath = response.data.imagepath + "";
+        if (response.data) {
+          setUser(response.data);
+        }
         setImageUrl(`http://localhost:9090/img/${imagePath}`)
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchUserProfile();
-  }, []);
+  }, [setImageUrl]);
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -41,12 +60,15 @@ const UserProfile = () => {
     try {
       const response = await AxiosInstance.post('uploadImage', formData, {
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwttoken')}`,
           'Content-Type': 'multipart/form-data'
         }
-      });
-      console.log(response.data);
+      });  
+      alert(response.data);
+      setImageUrl(`http://localhost:9090/img/${imagefile.name}`)
+  
     } catch (error) {
-      console.log(error);
+      alert(error.response.data);
     }
   };
 
@@ -55,12 +77,12 @@ const UserProfile = () => {
     <>
       <Header />
       <>
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center my-2">
           <div className="card w-75 h-90">
             <h5 className="card-header">Profile</h5>
             <div className="card-body">
               <div className='d-flex justify-content-center'>
-                <img src={imageUrl?imageUrl:dfImg} className="img-thumbnail" style={{ width: '100px', height: '100px' }} alt="..." />
+                <img src={imageUrl ? imageUrl : dfImg} className="img-thumbnail" style={{ width: '100px', height: '100px' }} alt="..." />
               </div>
               <div className='d-flex justify-content-center align-items-center'>
                 {/* <!-- Button trigger modal --> */}
@@ -86,7 +108,7 @@ const UserProfile = () => {
                       </div>
                       <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" onClick={updateImage} className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={updateImage} data-bs-dismiss="modal" className="btn btn-primary">Save changes</button>
                       </div>
                     </div>
                   </div>

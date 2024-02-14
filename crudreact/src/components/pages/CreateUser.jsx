@@ -20,6 +20,10 @@ const CreateUser = () => {
         userName: email,
         password: password,
         phoneNumber: phoneNumber
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwttoken')}`
+        }
       });
       alert("Registration successful");
 
@@ -40,29 +44,29 @@ const CreateUser = () => {
           <form onSubmit={handleSubmit} className='border border-dark w-75 p-5'>
             <h4 className='text-center'>Register</h4>
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">fullname</label>
+              <label htmlFor="exampleInputEmail1" className="form-label">first name</label>
               <input type="text" value={firstname} onChange={(e) => { setFirstname(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
 
             </div>
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">lastname</label>
+              <label htmlFor="exampleInputEmail1" className="form-label">lastname</label>
               <input type="text" value={lastname} onChange={(e) => { setLastname(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
 
             </div>
             <div className="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
               <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => { setEmail(e.target.value) }} />
 
             </div>
             <div className="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+              <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div className="mb-3">
-              <label for="examp" class="form-label">phone number</label>
-              <input type="number" class="form-control" value={phoneNumber} onChange={(e) => { setPhoneNumber(e.target.value) }} />
+              <label htmlFor="examp" className="form-label">phone number</label>
+              <input type="number" className="form-control" value={phoneNumber} onChange={(e) => { setPhoneNumber(e.target.value) }} />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
 
         </div>

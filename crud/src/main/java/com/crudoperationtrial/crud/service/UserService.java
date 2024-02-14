@@ -1,7 +1,6 @@
 package com.crudoperationtrial.crud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +30,10 @@ public class UserService {
         user.setRole(userDto.getRole());
         userRepo.save(user);
           
+    }
+
+    public void deleteUserById(Integer id) {
+        userRepo.deleteById(id);
     }
 
     

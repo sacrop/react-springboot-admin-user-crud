@@ -6,11 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -94,13 +95,20 @@ public class AdminController {
             User user=userRepo.findByUserName(username);
             user.setImagepath(imagepath);
             userRepo.save(user);
-            return ResponseEntity.ok("success");
+            return ResponseEntity.ok("profile photo updated successfully");
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-            // TODO: handle exception
         }
-        
+    }
 
+    @DeleteMapping("deleteUser/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id")Integer id){
+        try {
+            userService.deleteUserById(id);
+            return ResponseEntity.ok("delete successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

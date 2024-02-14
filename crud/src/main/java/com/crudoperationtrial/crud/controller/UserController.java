@@ -58,7 +58,7 @@ public class UserController {
             User user=userRepo.findByUserName(username);
             user.setImagepath(imagepath);
             userRepo.save(user);
-            return ResponseEntity.ok("success");
+            return ResponseEntity.ok("profile photo updated successfully");
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

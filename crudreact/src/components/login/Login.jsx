@@ -28,9 +28,11 @@ const Login = () => {
             dispatch(login(response.data.token))
             if (response.data.role === "USER") {
                 navigate('/')
+                // window.location.reload();
             }
             else if (response.data.role === "ADMIN") {
-                navigate('/admin/')
+                navigate('/admin')
+                // window.location.reload();
             }
         }).catch((error) => {
             alert(error.response.data)

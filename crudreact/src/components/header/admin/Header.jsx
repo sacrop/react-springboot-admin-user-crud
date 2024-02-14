@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../store/slice/Userslice';
@@ -6,20 +6,30 @@ import { logout } from '../../store/slice/Userslice';
 const Header = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem('jwttoken');
+    const role=localStorage.getItem('role');
+    if (!token) {
+        navigate('/login');
+    }
+    if(role==='USER'){
+      navigate('/')
+    }
+
+}, [navigate]);
 
   const loggingout = () => {
     
     localStorage.removeItem("jwttoken");
     localStorage.removeItem("role");
     dispatch(logout());
-    navigate('/')
-    
+    navigate('/')  
   }
   return (
     <>
     <nav className="navbar bg-info navbar-expand-lg">
   <div className="container-fluid">
-    <a className="navbar-brand mx-3" href="#">Admin home</a>
+    <Link to='/admin' className="navbar-brand mx-3" >Admin home</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>

@@ -26,11 +26,11 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService jwtService) {
-        this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-    }
+    // public AuthenticationService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    //     this.userRepo = userRepo;
+    //     this.passwordEncoder = passwordEncoder;
+    //     this.jwtService = jwtService;
+    // }
     public AuthenticationResponse register(User request) throws Exception{
         if(userRepo.existsByUserName(request.getUserName())){
             throw new Exception("username already exist");
@@ -42,7 +42,6 @@ public class AuthenticationService {
         user.setUserName(request.getUserName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole() != null ? request.getRole() : Role.USER);
-        // user.setRole(Role.USER);
         user=userRepo.save(user);
         String token=jwtService.generateToken(user);
         return new AuthenticationResponse(token,user.getRole().name());

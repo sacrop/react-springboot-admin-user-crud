@@ -15,8 +15,7 @@ const Header = () => {
     localStorage.removeItem("jwttoken");
     localStorage.removeItem("role");
     dispatch(logout());
-    navigate('/')
-    
+    navigate('/login')
   }
 
   return (

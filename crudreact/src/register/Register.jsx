@@ -40,7 +40,7 @@ const Register = () => {
             <form onSubmit={handleSubmit} className='border border-dark w-75 p-5'>
             <h4 className='text-center'>Register</h4>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">fullname</label>
+                    <label for="exampleInputEmail1" className="form-label">firstName</label>
                     <input type="text" value={firstname} onChange={(e) => { setFirstname(e.target.value)} } className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                         
                 </div>
