@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.crudoperationtrial.crud.Dto.UserDto;
+import com.crudoperationtrial.crud.Model.Role;
 import com.crudoperationtrial.crud.Model.User;
 import com.crudoperationtrial.crud.repository.UserRepository;
 
@@ -27,7 +28,12 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setUserName(userDto.getUserName());
-        user.setRole(userDto.getRole());
+        if(userDto.getRole()!=null){
+            user.setRole(userDto.getRole());
+        }
+        else{
+            user.setRole(Role.USER);
+        }   
         userRepo.save(user);
           
     }

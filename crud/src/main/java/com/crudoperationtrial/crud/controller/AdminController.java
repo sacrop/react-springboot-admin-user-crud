@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.crudoperationtrial.crud.Dto.UserDto;
+import com.crudoperationtrial.crud.Model.Role;
 import com.crudoperationtrial.crud.Model.User;
 import com.crudoperationtrial.crud.repository.UserRepository;
 import com.crudoperationtrial.crud.service.AuthenticationService;
@@ -63,7 +64,6 @@ public class AdminController {
     @PostMapping("/updateUser")
     public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) {
         try {
-            System.out.println("Received User: " + userDto);
             User user=userRepo.findById(userDto.getId()).orElseThrow(()-> new RuntimeException("user not found"));
             userService.updateUserProfile(user,userDto);
             // Perform any necessary logic with the user object
@@ -82,7 +82,7 @@ public class AdminController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("uploadImage")
+    @PostMapping("/uploadImage")
     public ResponseEntity<?> updateUserImage(@RequestParam("file") MultipartFile imgfile,@RequestParam("username")String username){
         try {
             String imagepath=imgfile.getOriginalFilename();
@@ -108,6 +108,18 @@ public class AdminController {
             userService.deleteUserById(id);
             return ResponseEntity.ok("delete successfully");
         } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/updateProfile")
+    public ResponseEntity<?> updateProfile(@RequestBody UserDto userDto){
+        try {
+            User user=userRepo.findById(userDto.getId()).orElseThrow(()-> new RuntimeException("user not found"));
+            userDto.setRole(Role.ADMIN);
+            userService.updateUserProfile(user,userDto);
+            return ResponseEntity.ok("successfully updated user details");
+        } catch (Exception e) {
+            // TODO: handle exception
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

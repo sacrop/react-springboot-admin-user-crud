@@ -75,7 +75,7 @@ const AdminMan = () => {
         }
       })
       console.log(response.data);
-      setModify(true);
+      setModify(!modify);
     } catch (error) {
       console.log(error.response.data)
     }

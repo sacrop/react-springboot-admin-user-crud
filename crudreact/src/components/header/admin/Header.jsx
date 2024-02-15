@@ -1,27 +1,22 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../store/slice/Userslice';
 
 const Header = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  const {token,role}=useSelector((state)=>state.userReducer)
   useEffect(() => {
-    const token = localStorage.getItem('jwttoken');
-    const role=localStorage.getItem('role');
     if (!token) {
         navigate('/login');
     }
     if(role==='USER'){
       navigate('/')
     }
-
 }, [navigate]);
 
   const loggingout = () => {
-    
-    localStorage.removeItem("jwttoken");
-    localStorage.removeItem("role");
     dispatch(logout());
     navigate('/')  
   }

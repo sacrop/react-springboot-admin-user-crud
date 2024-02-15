@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AxiosInstance from '../components/Axios/AxiosInstance';
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [firstname, setFirstname] = useState('');
@@ -18,51 +18,50 @@ const Register = () => {
             password: password,
             phoneNumber: phoneNumber
         }).then((response) => {
-            // localStorage.setItem("jwttoken", response.data.token)
             alert("registeration successfull")
-            navigator('/')
+            navigator('/login')
 
         }).catch((error) => {
             if (error.response && error.response.data) {
                 alert(error.response.data);
             }
             else {
-                alert("internal server erro")
+                alert("internal server error")
             }
         })
-
     }
     return (
         <>
-
+           
             <div className="container d-flex align-items-center justify-content-center min-vh-100 " style={{ transform: 'translateY(-10%)' }}>
             
             <form onSubmit={handleSubmit} className='border border-dark w-75 p-5'>
             <h4 className='text-center'>Register</h4>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">firstName</label>
-                    <input type="text" value={firstname} onChange={(e) => { setFirstname(e.target.value)} } className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                    <label htmlFor="exampleInputEmail1" className="form-label">firstName</label>
+                    <input type="text" value={firstname} required onChange={(e) => { setFirstname(e.target.value)} } className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                         
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">lastname</label>
-                    <input type="text"value={lastname} onChange={(e) => { setLastname(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                    <label htmlFor="exampleInputEmail1" className="form-label">lastname</label>
+                    <input type="text"value={lastname} required onChange={(e) => { setLastname(e.target.value) }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                         
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                    <input type="email" className="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => { setEmail(e.target.value) }} />
                         
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                    <input type="password" className="form-control" required id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className="mb-3">
-                    <label for="examp" class="form-label">phone number</label>
-                    <input type="number" class="form-control"  value={phoneNumber} onChange={(e) => { setPhoneNumber(e.target.value) }}/>
+                    <label htmlFor="examp" className="form-label">phone number</label>
+                    <input type="number" className="form-control" required  value={phoneNumber} onChange={(e) => { setPhoneNumber(e.target.value) }}/>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
 
             </div>

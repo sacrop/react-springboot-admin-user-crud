@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,13 +7,8 @@ import { logout } from '../../store/slice/Userslice';
 const Header = () => {
   const navigate=useNavigate();
   const loginstatus=useSelector((state)=>state.userReducer.loginStatus)
-  const [status,setStatus]=useState(loginstatus);
   const dispatch=useDispatch();
-
   const loggingout = () => {
-    setStatus()
-    localStorage.removeItem("jwttoken");
-    localStorage.removeItem("role");
     dispatch(logout());
     navigate('/login')
   }
@@ -29,7 +24,7 @@ const Header = () => {
         <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0 mx-4 ms-auto column-gap-3">
             
-            {status ===false? (
+            {loginstatus ===false? (
             <>
             <li className="nav-item dropdown float-left mx-5">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

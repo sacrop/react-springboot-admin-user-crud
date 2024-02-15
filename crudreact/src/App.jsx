@@ -5,10 +5,11 @@ import LoginPage from './components/pages/LoginPage'
 import RegisterPage from './components/pages/RegisterPage';
 import AdminHome from './components/pages/AdminHome';
 import UserHome from './components/pages/UserHome';
-import UserProfile from './components/pages/UserProfile';
-import AdminProfile from './components/pages/AdminProfile';
 import AdminMan from './components/pages/AdminMan';
 import CreateUser from './components/pages/CreateUser';
+import AdminProfilePage from './components/pages/AdminProfilePage';
+import UserProfilePage from './components/pages/UserProfilePage';
+
 
 function App() {
   return (
@@ -19,10 +20,10 @@ function App() {
       <Route path='/register' element={<RegisterPage/>}/>
       <Route path='/user' element={<UserHome/>}/>
       <Route path='/admin' element={<AdminHome/>}/>
-      <Route path='/admin/profile' element={<AdminProfile/>}/>
+      <Route path='/admin/profile' element={<AdminProfilePage/>}/>
       <Route path='/admin/userman' element={<AdminMan/>}/>
       <Route path='/admin/createUser' element={<CreateUser/>}/>
-      <Route path='/profile' element={<UserProfile/>}/>
+      <Route path='/profile' element={<UserProfilePage/>}/>
      </Routes>
     </div>
 

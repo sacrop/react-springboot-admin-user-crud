@@ -4,6 +4,7 @@ import AxiosInstance from '../Axios/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/slice/Userslice';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -23,16 +24,15 @@ const Login = () => {
             userName: username,
             password: password
         }).then((response) => {
-            localStorage.setItem("jwttoken", response.data.token)
-            localStorage.setItem("role", response.data.role)
-            dispatch(login(response.data.token))
+            if(response&&response.data){
+                alert("successfull login")
+            dispatch(login(response.data))
             if (response.data.role === "USER") {
                 navigate('/')
-                // window.location.reload();
             }
             else if (response.data.role === "ADMIN") {
                 navigate('/admin')
-                // window.location.reload();
+            }
             }
         }).catch((error) => {
             alert(error.response.data)
@@ -46,14 +46,19 @@ const Login = () => {
                     <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={username} onChange={(e) => setUsername(e.target.value)} />
-                        
+
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                         <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
+
                     <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className='text-center'>
+                        <Link to='/register'>sign up to continue</Link>
+                    </div>
                 </form>
+
             </div>
 
 
